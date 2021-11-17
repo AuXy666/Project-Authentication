@@ -1,0 +1,8 @@
+express
+exoress-session
+mongoose
+morgan
+nodemon
+bcrypt
+body-parser
+cookie-parser
