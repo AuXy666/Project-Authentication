@@ -4,7 +4,7 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var morgan = require("morgan");
 var User = require("./models/User");
-
+var User2=1;
 var app = express();
 
 
