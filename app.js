@@ -4,12 +4,11 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var morgan = require("morgan");
 var User = require("./models/User");
-var User2=1;
+var User2 = 1;
 var app = express();
 
-
+//meow
 app.set("port", 3000);
-
 
 app.use(morgan("dev"));
 
@@ -33,8 +32,8 @@ app.use(
 );
 
 //unexpected login situation handler which will remove saved cookie if the user doesn't achieve success page,e.g to remove cookie if user stops express during login page
-app.use((req, res, next) => {  
-if (req.cookies.user_sid && !req.session.user) {
+app.use((req, res, next) => {
+  if (req.cookies.user_sid && !req.session.user) {
     res.clearCookie("user_sid");
   }
   next();
@@ -61,17 +60,16 @@ app
     res.sendFile(__dirname + "/frontend/signup.html");
   })
   .post((req, res) => {
-
     var user = new User({
       username: req.body.username,
       email: req.body.email,
-      password:req.body.password,
+      password: req.body.password,
     });
     user.save((err, docs) => {
       if (err) {
         res.redirect("/signup");
       } else {
-          console.log(docs)
+        console.log(docs);
         req.session.user = docs;
         res.redirect("/success");
       }
@@ -88,20 +86,20 @@ app
     var username = req.body.username,
       password = req.body.password;
 
-      try {
-        var user = await User.findOne({ username: username }).exec();
-        if(!user) {
-            res.redirect("/login");
+    try {
+      var user = await User.findOne({ username: username }).exec();
+      if (!user) {
+        res.redirect("/login");
+      }
+      user.comparePassword(password, (error, match) => {
+        if (!match) {
+          res.redirect("/login");
         }
-        user.comparePassword(password, (error, match) => {
-            if(!match) {
-              res.redirect("/login");
-            }
-        });
-        req.session.user = user;
-        res.redirect("/success");
+      });
+      req.session.user = user;
+      res.redirect("/success");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   });
 
@@ -128,7 +126,6 @@ app.get("/logout", (req, res) => {
 app.use(function (req, res, next) {
   res.status(404).send("Sorry can't find that!");
 });
-
 
 app.listen(app.get("port"), () =>
   console.log(`App started on port ${app.get("port")}`)
