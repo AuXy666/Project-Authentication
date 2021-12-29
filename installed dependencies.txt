@@ -1,8 +1,8 @@
-express
+express {npm install express --save}
 exoress-session
 mongoose
 morgan
-nodemon
+nodemon  {npm install -g nodemon}
 bcrypt
 body-parser
 cookie-parser

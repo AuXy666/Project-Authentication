@@ -4,7 +4,10 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var morgan = require("morgan");
 var User = require("./models/User");
+const bcrypt = require('bcrypt');
+const { connect } = require("mongoose");
 var User2 = 1;
+var currentEmail;
 var app = express();
 // testing changes
 //meow
@@ -53,6 +56,8 @@ app.get("/", sessionChecker, (req, res) => {
   res.redirect("/login");
 });
 
+
+
 // signup route
 app
   .route("/signup")
@@ -64,6 +69,9 @@ app
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
+      question1:req.body.Question1,
+      question2:req.body.Question2,
+      question3:req.body.Question3,
     });
     user.save((err, docs) => {
       if (err) {
@@ -102,6 +110,87 @@ app
       console.log(error);
     }
   });
+
+  // forgot
+
+app.get("/forgot",sessionChecker, (req, res) => {
+  
+   console.log("I am in forgot");
+    res.sendFile(__dirname + "/frontend/forgot.html");
+  
+});
+
+app.post("/update",sessionChecker,(req, res) => {
+  var email = req.body.email;
+  counter=0;
+  User.findOne({email:email}, function(err, result) {
+   
+     if(result)
+     {  
+          console.log(result.email);
+          var temp=email;
+          currentEmail=temp;
+          var question1=req.body.Question1;
+          var question2=req.body.Question2;  
+          var question3=req.body.Question3;               
+          res.sendFile(__dirname + "/frontend/askQuestion.html");
+          //res.redirect("/reset");        
+          User.findOne({$and: [{email:temp},{question1:question1},{question2:question2},{question3:question3}] }, function(err, result2) {
+            if(result)
+            {
+              counter=1;
+              console.log(result.username);
+              
+            }
+            else
+            {
+              counter=2;
+              console.log("Wrong Security Answers entered");
+            }
+          });
+      }
+      else
+      {  
+        counter=2;  
+        console.log("Not Found")
+      }
+
+      if(counter==1)
+      {
+        res.sendFile(__dirname + "/frontend/reset.html");
+      }
+
+    });
+
+  
+})
+
+
+app
+  .route("/reset")
+  .get(sessionChecker, (req, res) => {  
+  console.log("I am in reset");
+  res.sendFile(__dirname + "/frontend/reset.html");
+  })
+  .post((req, res) => {
+            //reset portion
+        var password=req.body.password;
+        password = bcrypt.hashSync(password, 10);
+        User.updateOne({email:currentEmail},{ $set: { password:password} }, function(err, result2) {
+          if(result2) //true(password reset)
+          {
+
+          res.redirect("/login");
+          }
+          else
+          {
+           console.log("Error"); 
+          }
+         
+
+        });
+ 
+});
 
 // success route
 app.get("/success", (req, res) => {

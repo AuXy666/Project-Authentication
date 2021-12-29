@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 mongoose.connect("mongodb://localhost:27017/userDB",{
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
 })
 
 const userSchema = mongoose.Schema({
@@ -20,7 +20,19 @@ const userSchema = mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    question1:{
+        type:String,
+        require:true
+    },
+    question2:{
+        type:String,
+        require:true
+    },
+    question3:{
+        type:String,
+        require:true
+    },
 })
 
 userSchema.pre("save", function(next) {
