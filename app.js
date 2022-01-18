@@ -8,7 +8,21 @@ const bcrypt = require('bcrypt');
 const { connect } = require("mongoose");
 var User2 = 1;
 var currentEmail;
+var currentUsername;
 var app = express();
+var checker=false;
+//var usableCommands=["set alarm", "current weather", "upcoming forcast", "set alarm", "calculator", "set timer", "search something", "ask about bot", "make me laugh"];
+//var arrayLength = usableCommands.length;
+//var commandIndex;
+//for (var i = 0; i < arrayLength; i++) {
+  //  if(req.body.command==usableCommands[i])
+    // {
+    //   commandIndex=var;
+    //  break;
+    //  }
+  // 
+//}
+//
 // testing changes
 //meow
 app.set("port", 3000);
@@ -68,6 +82,8 @@ app
     var user = new User({
       username: req.body.username,
       email: req.body.email,
+      country:req.body.country,
+      education:req.body.education,
       password: req.body.password,
       question1:req.body.Question1,
       question2:req.body.Question2,
@@ -79,6 +95,7 @@ app
       } else {
         console.log(docs);
         req.session.user = docs;
+        currentUsername=req.body.username;
         res.redirect("/success");
       }
     });
@@ -93,7 +110,7 @@ app
   .post(async (req, res) => {
     var username = req.body.username,
       password = req.body.password;
-
+        console.log(req.body.username);
     try {
       var user = await User.findOne({ username: username }).exec();
       if (!user) {
@@ -105,7 +122,9 @@ app
         }
       });
       req.session.user = user;
+      currentUsername=req.body.username;
       res.redirect("/success");
+      console.log(username);
     } catch (error) {
       console.log(error);
     }
@@ -139,7 +158,6 @@ app.post("/update",sessionChecker,(req, res) => {
             if(result)
             {
               counter=1;
-              console.log(result.username);
               
             }
             else
@@ -179,7 +197,7 @@ app
         User.updateOne({email:currentEmail},{ $set: { password:password} }, function(err, result2) {
           if(result2) //true(password reset)
           {
-
+             
           res.redirect("/login");
           }
           else
@@ -195,10 +213,165 @@ app
 // success route
 app.get("/success", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
-    res.sendFile(__dirname + "/frontend/success.html");
+    res.sendFile(__dirname + "/frontend/dashboard.html");
   } else {
     res.redirect("/login");
   }
+});
+
+//profileShow
+app.get("/profileShow", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/frontend/profile.html");
+  } 
+});
+
+
+//profileStyle
+app.get("/profileStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/frontend/profileStyle.css");
+  } 
+});
+
+//img in profile
+app.get("/img_20", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/frontend/img_20.jpg");
+  } 
+});
+
+//texteditor style1
+app.get("/texteditorStyle1", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/css/bootstrap.min.css");
+  } 
+});
+//texteditor style2
+app.get("/texteditorStyle2", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/css/style.css");
+  } 
+});
+app.get("/texteditorStyle2", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/css/style.css");
+  } 
+});
+
+//js/app.js
+app.get("/texteditorapp", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/js/app.js");
+  } 
+});
+
+//list img
+app.get("/texteditorimg", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/images/water-blue.jpg");
+  } 
+});
+
+//styles.css
+app.get("/calculatorStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Calculator/styles.css");
+  } 
+});
+
+///stopwatchStyle
+
+app.get("/stopwatchStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Stopwatch/style.css");
+  } 
+});
+
+//
+app.get("/stopwatchScript", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Stopwatch/script.js");
+  } 
+});
+app.get("/opencalculator", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Calculator/index.html");
+  } 
+});
+
+
+//stopwatch opener
+app.get("/openstopwatch", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Stopwatch/index.html");
+  } 
+});
+
+//
+app.get("/openlist", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Text Editor/index.html");
+  } 
+});
+
+
+
+app.get("/driver", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Frontend/success.html");
+  } 
+});
+
+app.post("/driver", (req, res) => {
+     
+    var command=req.body.usableCommand;
+   console.log(command);
+    console.log("I am in driver");
+     console.log(command);
+    if(command=="create list")
+    {
+      res.redirect("/openlist");
+    } else if(command=="calculator")
+    {
+      res.redirect("/opencalculator");
+    } else if(command=="stopwatch")
+    {
+      res.redirect("/openstopwatch");
+    }  else
+    {
+      res.sendFile(__dirname + "/frontend/dashboard.html");
+    }
+  
+  
+});
+
+//dashboard style
+app.get("/dashStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/frontend/dash.css");
+  } 
+});
+
+//profile show
+app.post("/profileShow", (req, res) => {
+  console.log(req.body.email);
+  console.log(req.body.country);
+  console.log(req.body.education);
+  User.updateOne({username:currentUsername},{ $set: { email:req.body.email, country:req.body.country , education:req.body.education} }, function(err, result2) {
+    if(result2) 
+    {     
+    res.redirect("/success");
+    }
+    else
+    {
+     res.redirect("/success");
+     console.log("Error"); 
+    }
+   
+
+  });
+
 });
 
 // Logout route

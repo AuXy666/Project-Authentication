@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="//https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="/profileStyle">
+</head>
+
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="/img_20"><span class="font-weight-bold">Awais</span><span class="text-black-50">awais.shahid@gmail.com</span><span> </span></div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">User Profile</h4>
+                </div>
+                <form autocomplete="off" action="/profileShow" method="post">
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input class="form-control" required type="text" name="email"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Country:</label>
+                        <input class="form-control" required type="text" name="country"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Education:</label>
+                        <input class="form-control" required type="text" name="education"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="UPDATE"/>
+                    </div>
+                    <div class="form-group">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>History</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">History</label><input type="text" class="form-control" placeholder="Experience" value=""></div> <br>
+            </div>
+            <form autocomplete="off" action="/logout" method="get">
+                <input class="btn btn-primary" type="submit" value="Logout"/>
+
+            </form>
+        </div>
+    </div>
+    
+</div>
+</div>
+</div>
+</form>
+<form action="\showProfile" method="Post">
+    <output></output>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/dashStyle">
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+  <div class="sidebar">
+    <div class="logo-details">
+      <i class=''></i>
+      <span class="logo_name">Life Bot</span>
+    </div>
+
+      <ul class="nav-links">
+        <li>
+          <a href="/success" class="active">
+            <i class='bx bx-grid-alt' ></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+     
+        <li>
+          <a href="/profileShow">
+            <i class='bx bx-box' ></i>
+            <span class="links_name">Profile</span>
+          </a>
+        </li>
+        <li>
+          <a href="success">
+            <i class='bx bx-list-ul' ></i>
+            <span class="links_name">Use Able Commands
+            </span>
+          </a>
+        </li>
+       
+      </ul>
+  </div>
+  <section class="home-section">
+    <nav>
+      <div class="sidebar-button">
+        <i class='bx bx-menu sidebarBtn'></i>
+        <span class="dashboard">Dashboard</span>
+      </div>
+      <div class="logout-btn">
+        <a href="#">
+          <i class='bx bx-log-out-circle' ></i>
+          <form autocomplete="off" action="/logout" method="get">
+            <input class="logoutbtn" type="submit" value="Logout"/>
+
+        </form>
+        </a>
+      </div>
+    </nav>
+
+    <div class="home-content">
+      <div class="overview-boxes">
+    
+      
+      
+        <div class="container">
+          <div id="w-input-container" onclick="setFocus()">
+            <div class="w-input-text-group">
+              <div id="w-input-text" contenteditable></div>
+              <div class="w-placeholder">
+                Type a message
+              </div>
+            </div>
+          </div>
+        </div>
+               <form autocomplete="off" action="/driver" method="post">
+                    <div class="form-group">
+                      <input class="form-control" required type="text" name="usableCommand"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="ENTER"/>
+                    </div>
+                </form>
+              
+      
+      </div>
+      
+    </div>
+  </section>
+
+  <script>
+   let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".sidebarBtn");
+sidebarBtn.onclick = function() {
+  sidebar.classList.toggle("active");
+  if(sidebar.classList.contains("active")){
+  sidebarBtn.classList.replace("bx-menu" ,"bx-menu-alt-right");
+}else
+  sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
+}
+ </script>
+
+</body>
+</html>
+

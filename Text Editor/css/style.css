@@ -1,0 +1,23 @@
+body {
+    background-image:
+        linear-gradient(rgba(23, 24, 34, 0.600),
+            rgba(23, 24, 34, 0.600)),
+        url('/texteditorimg');
+}
+
+.title-head {
+    color: rgb(14, 198, 94);
+}
+
+.desc-head {
+    color: rgb(11, 218, 128);
+}
+
+.del-head {
+    color: rgb(220, 8, 8);
+}
+
+hr {
+    border-top: 1px solid rgb(248, 247, 250);
+}
+

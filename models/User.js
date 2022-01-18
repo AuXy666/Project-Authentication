@@ -17,6 +17,14 @@ const userSchema = mongoose.Schema({
         unique:true,
         required:true
     },
+    country:{
+        type:String,
+        required:true
+    },
+    education:{
+        type:String,
+        required:true
+    },
     password:{
         type:String,
         required:true
