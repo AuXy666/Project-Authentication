@@ -288,17 +288,78 @@ app.get("/stopwatchStyle", (req, res) => {
   } 
 });
 
-//
+//stopwatchscript
 app.get("/stopwatchScript", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     res.sendFile(__dirname + "/Stopwatch/script.js");
   } 
 });
+
+//weatherimg
+
+app.get("/currentweather", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Current Weather/sky.jpg");
+  } 
+});
+
+// forecast styling
+app.get("/forecastStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/forecast/style.css");
+  } 
+});
+
+///index.js
+app.get("/forecastScript", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/forecast/index.js");
+  } 
+});
+
+///img/sky.jpg
+app.get("/forecastimg", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/forecast/img/sky.jpg");
+  } 
+});
+
+//alarm styling
+
+app.get("/alarmStyle", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/alarm/alarm.css");
+  } 
+});
+
+///alarm.js
+
+app.get("/alarmScript", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/alarm/alarm.js");
+  } 
+});
+
+//alarm.jpg
+app.get("/alarmimg", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/alarm/alarm.jpg");
+  } 
+});
+
+///tune.mp3
+app.get("/alarmtune", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/alarm/tune.mp3");
+  } 
+});
+
 app.get("/opencalculator", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
     res.sendFile(__dirname + "/Calculator/index.html");
   } 
 });
+
 
 
 //stopwatch opener
@@ -315,7 +376,23 @@ app.get("/openlist", (req, res) => {
   } 
 });
 
+app.get("/opencurrentweather", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/Current Weather/index.html");
+  } 
+});
 
+app.get("/openforecast", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/forecast/index.html");
+  } 
+});
+
+app.get("/openalarm", (req, res) => {
+  if (req.session.user && req.cookies.user_sid) {
+    res.sendFile(__dirname + "/alarm/index.html");
+  } 
+});
 
 app.get("/driver", (req, res) => {
   if (req.session.user && req.cookies.user_sid) {
@@ -338,7 +415,17 @@ app.post("/driver", (req, res) => {
     } else if(command=="stopwatch")
     {
       res.redirect("/openstopwatch");
-    }  else
+    }  else if(command=="current weather")
+    {
+      res.redirect("/opencurrentweather");
+    } else if(command=="weather forecast")
+    {
+      res.redirect("/openforecast");
+    } else if(command=="alarm")
+    {
+      res.redirect("/openalarm");
+    }
+      else
     {
       res.sendFile(__dirname + "/frontend/dashboard.html");
     }

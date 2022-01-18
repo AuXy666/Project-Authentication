@@ -61,24 +61,22 @@
       
       
         <div class="container">
-          <div id="w-input-container" onclick="setFocus()">
-            <div class="w-input-text-group">
-              <div id="w-input-text" contenteditable></div>
-              <div class="w-placeholder">
-                Type a message
-              </div>
+          <form autocomplete="off" action="/driver" method="post">
+            <div class="form-group1" >
+              <input class="form-control" required type="text" name="usableCommand"/>
             </div>
-          </div>
+        </form>
         </div>
-               <form autocomplete="off" action="/driver" method="post">
-                    <div class="form-group">
+        <div class="container1">
+                      <form autocomplete="off" action="/driver" method="post">
+                    <div class="form-group1" >
                       <input class="form-control" required type="text" name="usableCommand"/>
                     </div>
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="ENTER"/>
                     </div>
                 </form>
-              
+              </div>
       
       </div>
       

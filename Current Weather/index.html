@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700&display=swap');
+        body{
+            background-image: url('/currentweather');
+             background-attachment: fixed;
+           background-size: cover;
+           background-repeat: no-repeat;
+        }
+        h1{
+            font-weight: 400;
+            font-family: 'Raleway', sans-serif;
+            text-align: center;
+            font-weight: 400;
+        }
+@media screen and (max-width: 500px) {
+    #container{
+      width: 70%;
+ }    
+}
+   </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Weather</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <h1><center>Weather Website</center></h1>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-5 mx-auto mt-5 p-4" style="box-shadow: 0px 0px 12px rgb(44, 116, 145);">
+           <input type="text"class="form-control"placeholder="Enter city Name..."id="city">
+           <button type="button"class="btn btn-info mt-2 btn-block" onclick="weathercheck()">Check Current Weather</button>
+           <div class="text-center mt-4"> 
+               <h4>
+                   <span id="city_name"></span>
+                   <span id="country_name"></span>
+                </h4>
+                <div id="icon"></div>
+                <p>
+                    <span id="main"></span>
+                    <em id="description"></em>
+                    <ins id="temp"></ins>
+                </p>
+           </div>
+        </div>
+     </div>
+    </div>
+    <script>
+        function weathercheck(){
+           var city = document.getElementById("city").value;
+        
+        $.ajax({
+            url:"https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=659da4f841d88a105184b50a5a337f51&units=metric",
+            type:"get",
+            success:function(data){
+                $("#icon").html("<img src='https://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png'>");
+                $("#city_name").html(data.name);
+                $("#country_name").html(" ("+data.sys.country+")");
+                $("#main").html(data.weather[0].main);
+                $("#description").html ("("+data.weather[0].description+")");
+                $("#temp").html("Temp:"+data.main.temp+"&deg;C");
+
+
+            }
+        })
+
+    }
+    </script>
+</body>
+</html>
