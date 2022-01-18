@@ -4,11 +4,15 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var morgan = require("morgan");
 var User = require("./models/User");
+<<<<<<< HEAD
 const bcrypt = require('bcrypt');
 const { connect } = require("mongoose");
 var User2 = 1;
 var currentEmail;
 var currentUsername;
+=======
+var User2=1;
+>>>>>>> 9c36536 (Added new user)
 var app = express();
 var checker=false;
 //var usableCommands=["set alarm", "current weather", "upcoming forcast", "set alarm", "calculator", "set timer", "search something", "ask about bot", "make me laugh"];
